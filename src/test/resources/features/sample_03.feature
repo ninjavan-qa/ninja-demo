@@ -7,3 +7,10 @@ Feature: Cucumber example
     When I type "Selenium" on the search input - Allure
     And I click submit button - Allure
     Then I should see the title is "Selenium" - Allure
+
+  @LaunchBrowserV2 @CloseBrowserV2
+  Scenario: Search article on Wikipedia - failed
+    Given I am on "https://www.wikipedia.org/" - Allure
+    When I type "Selenium" on the search input - Allure
+    And I click submit button - Allure
+    Then I should see the title is "Not Selenium" - Allure
