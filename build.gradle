@@ -1,0 +1,79 @@
+group "co.nvqa"
+version "1.0.0"
+apply plugin: "java"
+
+sourceCompatibility = 1.8
+
+buildscript {
+    repositories {
+        jcenter()
+    }
+    dependencies {
+        classpath "io.qameta.allure:allure-gradle:2.5"
+    }
+}
+
+repositories {
+    mavenCentral()
+}
+
+test {
+    testLogging {
+        exceptionFormat = "full"
+    }
+}
+
+configurations {
+    agent
+}
+
+dependencies {
+    agent "org.aspectj:aspectjweaver:1.9.2"
+    
+    compile "com.google.inject:guice:4.2.0"
+    compile "io.cucumber:cucumber-java:3.0.2"
+    compile "io.cucumber:cucumber-guice:3.0.2"
+    compile "io.github.bonigarcia:webdrivermanager:3.0.0"
+    compile "io.qameta.allure:allure-cucumber3-jvm:2.7.0"
+    compile "javax.xml.bind:jaxb-api:2.3.1"
+    compile "junit:junit:4.12"
+    compile "org.seleniumhq.selenium:selenium-java:3.14.0"
+}
+
+apply plugin: 'io.qameta.allure'
+
+allure {
+    version = '2.7.0'
+    aspectjweaver = true
+    autoconfigure = false
+}
+
+task runCucumber(type: JavaExec) {
+    main = "cucumber.api.cli.Main"
+    classpath = sourceSets.test.runtimeClasspath
+    jvmArgs = ["-XX:+IgnoreUnrecognizedVMOptions", "--add-modules java.se.ee"]
+    args = [
+            "--monochrome",
+            "--snippets", "camelcase",
+            "--plugin", "pretty",
+            "--plugin", "html:build/reports/html-output",
+            "--plugin", "junit:build/reports/cucumber-junit/cucumber.xml",
+            "--glue", "co.nvqa.example_1.glue",
+            "${sourceSets.test.output.resourcesDir}/features"
+    ]
+
+    if(project.hasProperty("tags")) {
+        def tags = project.getProperty("tags")
+        args "--tags", tags
+    }
+
+    if(project.hasProperty("useAllure")) {
+        def useAllure = project.getProperty("useAllure")
+
+        if(useAllure) {
+            args "--plugin", "io.qameta.allure.cucumber3jvm.AllureCucumber3Jvm"
+            jvmArgs "-javaagent:${configurations.agent.singleFile}"
+            systemProperties["allure.results.directory"] = "build/allure-results"
+        }
+    }
+}
