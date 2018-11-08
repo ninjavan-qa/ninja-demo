@@ -1,4 +1,4 @@
-package co.nvqa.example_1.glue;
+package co.nvqa.ninja_demo.glue;
 
 import cucumber.api.Scenario;
 import cucumber.api.java.After;

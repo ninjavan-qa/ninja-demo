@@ -29,10 +29,11 @@ configurations {
 
 dependencies {
     agent "org.aspectj:aspectjweaver:1.9.2"
-    
+
     compile "com.google.inject:guice:4.2.0"
-    compile "io.cucumber:cucumber-java:3.0.2"
     compile "io.cucumber:cucumber-guice:3.0.2"
+    compile "io.cucumber:cucumber-java:3.0.2"
+    compile "io.cucumber:cucumber-junit:3.0.2"
     compile "io.github.bonigarcia:webdrivermanager:3.0.0"
     compile "io.qameta.allure:allure-cucumber3-jvm:2.7.0"
     compile "javax.xml.bind:jaxb-api:2.3.1"
@@ -58,7 +59,7 @@ task runCucumber(type: JavaExec) {
             "--plugin", "pretty",
             "--plugin", "html:build/reports/html-output",
             "--plugin", "junit:build/reports/cucumber-junit/cucumber.xml",
-            "--glue", "co.nvqa.example_1.glue",
+            "--glue", "co.nvqa.ninja_demo.glue",
             "${sourceSets.test.output.resourcesDir}/features"
     ]
 

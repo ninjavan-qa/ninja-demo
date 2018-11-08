@@ -1,14 +1,16 @@
-package co.nvqa.example_1.glue;
+package co.nvqa.ninja_demo.glue;
 
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
+import cucumber.runtime.java.guice.ScenarioScoped;
 import org.junit.Assert;
 
 /**
  *
  * @author Daniel Joi Partogi Hutapea
  */
+@ScenarioScoped
 public class Sample01Steps
 {
     private String actualDay;
