@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+
+body {
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+/* Full-width input fields */
+input[type=text], input[type=password] {
+  width: 100%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  display: inline-block;
+  border: 1px solid #ccc;
+  box-sizing: border-box;
+}
+
+/* Set a style for all buttons */
+button {
+  background-color: #4CAF50;
+  color: white;
+  padding: 14px 20px;
+  margin: 8px 0;
+  border: none;
+  cursor: pointer;
+  width: 100%;
+}
+
+button:hover {
+  opacity: 0.8;
+}
+
+img.avatar {
+  width: 40%;
+  border-radius: 50%;
+}
+
+.container {
+  padding: 16px;
+}
+
+span.psw {
+  float: right;
+  padding-top: 16px;
+}
+
+/* Form Content/Box */
+.form-content {
+  background-color: #fefefe;
+  margin: 5% auto 0px auto; /* 5% from the top, 15% from the bottom and centered */
+  border: 1px solid #888;
+  width: 80%; /* Could be more or less, depending on screen size */
+}
+
+.header-title {
+  text-align: center;
+}
+
+</style>
+</head>
+<body onload="onBodyLoad()">
+
+<h2 class="header-title">Login Form</h2>
+
+<form class="form-content" action="javascript:void(0);">
+  <div class="container">
+    <label><b>Username</b></label>
+    <input type="text" required>
+
+    <label><b>Password</b></label>
+    <input type="password" required>
+      
+    <button onclick="onLogin()">Login</button>
+  </div>
+</form>
+
+<form class="form-content" action="javascript:void(0);">
+  <div class="container">
+    <label><b>Username</b></label>
+    <input type="text" required>
+
+    <label><b>Password</b></label>
+    <input type="password" required>
+      
+    <button onclick="onLogin()">Login</button>
+  </div>
+</form>
+
+<h2 class="header-title">RESULT:</h2>
+<p id="result" class="header-title">-</p>
+
+<script>
+
+let selectedForm;
+
+function onBodyLoad() {
+  let formElements = document.getElementsByTagName("form");
+  const formElementsSize = formElements.length;
+  const randomIndex = Math.floor(Math.random() * formElementsSize);
+  formElements[randomIndex].style.display='none';
+  selectedForm = formElements[(randomIndex+1)%2];
+}
+
+function onLogin() {
+  const username = selectedForm.children[0].children[1].value;
+  const password = selectedForm.children[0].children[3].value;
+  const result = document.getElementById("result");
+
+  if(username==="admin" && password==="admin") {
+    result.innerHTML = "LOGIN SUCCESS"
+  }
+  else {
+    result.innerHTML = "LOGIN FAILED"
+  }
+}
+
+</script>
+
+</body>
+</html>
