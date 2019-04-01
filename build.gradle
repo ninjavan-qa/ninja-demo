@@ -30,15 +30,21 @@ configurations {
 dependencies {
     agent "org.aspectj:aspectjweaver:1.9.2"
 
-    testImplementation "com.google.inject:guice:4.2.0"
-    testImplementation "io.cucumber:cucumber-guice:3.0.2"
-    testImplementation "io.cucumber:cucumber-java:3.0.2"
-    testImplementation "io.cucumber:cucumber-junit:3.0.2"
-    testImplementation "io.qameta.allure:allure-cucumber3-jvm:2.7.0"
-    testImplementation "org.seleniumhq.selenium:selenium-java:3.14.0"
-    testImplementation "io.github.bonigarcia:webdrivermanager:3.0.0"
-    testImplementation "io.rest-assured:rest-assured:3.2.0"
-    testImplementation "io.rest-assured:json-path:3.2.0"
+    testImplementation "com.google.inject:guice:4.2.2"
+    testImplementation "com.google.guava:guava:27.0.1-jre"
+
+    testImplementation "io.cucumber:cucumber-java:4.2.6"
+    testImplementation "io.cucumber:cucumber-junit:4.2.6"
+    testImplementation "io.cucumber:cucumber-guice:4.2.6"
+    testImplementation "io.qameta.allure:allure-cucumber4-jvm:2.10.0"
+
+
+    testImplementation "org.seleniumhq.selenium:selenium-java:3.141.59"
+    testImplementation "io.github.bonigarcia:webdrivermanager:3.3.0"
+
+    testImplementation "io.rest-assured:rest-assured:3.3.0"
+    testImplementation "io.rest-assured:json-path:3.3.0"
+
     testImplementation "javax.xml.bind:jaxb-api:2.3.1"
     testImplementation "junit:junit:4.12"
 }
@@ -74,7 +80,7 @@ task runCucumber(type: JavaExec) {
         def useAllure = project.getProperty("useAllure")
 
         if(useAllure) {
-            args "--plugin", "io.qameta.allure.cucumber3jvm.AllureCucumber3Jvm"
+            args "--plugin", "io.qameta.allure.cucumber4jvm.AllureCucumber4Jvm"
             jvmArgs "-javaagent:${configurations.agent.singleFile}"
             systemProperties["allure.results.directory"] = "build/allure-results"
         }
