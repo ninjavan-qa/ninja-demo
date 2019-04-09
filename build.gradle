@@ -17,12 +17,6 @@ repositories {
     mavenCentral()
 }
 
-test {
-    testLogging {
-        exceptionFormat = "full"
-    }
-}
-
 configurations {
     agent
 }
@@ -49,12 +43,13 @@ dependencies {
     testImplementation "junit:junit:4.12"
 }
 
-apply plugin: 'io.qameta.allure'
+apply plugin: io.qameta.allure.gradle.AllurePlugin
 
 allure {
-    version = '2.7.0'
+    version = "2.9.0"
     aspectjweaver = true
     autoconfigure = false
+    downloadLink = "https://dl.bintray.com/qameta/maven/io/qameta/allure/allure-commandline/${version}/allure-commandline-${version}.zip"
 }
 
 task runCucumber(type: JavaExec) {
