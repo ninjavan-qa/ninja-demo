@@ -71,7 +71,7 @@ span.psw {
     <input type="text" required>
 
     <label><b>Password</b></label>
-    <input type="password" required>
+    <input type="text" required>
       
     <button onclick="onLogin()">Login</button>
   </div>
@@ -79,11 +79,12 @@ span.psw {
 
 <form class="form-content" action="javascript:void(0);">
   <div class="container">
-    <label><b>Username</b></label>
-    <input type="text" required>
 
     <label><b>Password</b></label>
-    <input type="password" required>
+    <input type="text" required>
+
+    <label><b>Username</b></label>
+    <input type="text" required>
       
     <button onclick="onLogin()">Login</button>
   </div>
@@ -95,9 +96,11 @@ span.psw {
 <script>
 
 let selectedForm;
+let formElements;
 
 function onBodyLoad() {
-  let formElements = document.getElementsByTagName("form");
+  console.log("A2");
+  formElements = document.getElementsByTagName("form");
   const formElementsSize = formElements.length;
   const randomIndex = Math.floor(Math.random() * formElementsSize);
   formElements[randomIndex].style.display='none';
@@ -105,11 +108,24 @@ function onBodyLoad() {
 }
 
 function onLogin() {
-  const username = selectedForm.children[0].children[1].value;
-  const password = selectedForm.children[0].children[3].value;
+  let username;
+  let password;
+
+  if(selectedForm===formElements[0]) {
+    username = selectedForm.children[0].children[1].value;
+    password = selectedForm.children[0].children[3].value;
+  }
+  else if(selectedForm===formElements[1]) {
+    password = selectedForm.children[0].children[1].value;
+    username = selectedForm.children[0].children[3].value;
+  }
+
+  console.log("Username: "+username);
+  console.log("Password: "+password);
+
   const result = document.getElementById("result");
 
-  if(username==="admin" && password==="admin") {
+  if(username==="myusername" && password==="mypassword") {
     result.innerHTML = "LOGIN SUCCESS"
   }
   else {
