@@ -22,7 +22,7 @@ import org.junit.runner.RunWith;
     {
         "src/test/resources/features"
     },
-    tags = "@Sample02"
+        tags = "@Sample02"
 )
 public class CucumberRunner
 {
